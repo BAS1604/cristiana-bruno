@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nós Dois ❤️</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf8f6;color:#382f2d;font-family:Georgia,serif}.hero{min-height:92vh;display:grid;place-items:center;text-align:center;padding:30px}.eyebrow{font:11px Arial;letter-spacing:3px;text-transform:uppercase;color:#a08480}.hero h1{font-size:clamp(52px,12vw,90px);font-weight:400;margin:16px 0 5px}.hero p{color:#806f6a}.counter{margin:35px auto;padding:25px;max-width:470px;background:#fff;border:1px solid #eadfda;border-radius:25px;box-shadow:0 12px 35px #4d39330b}.days{font:50px Arial;color:#b98484}.label{font:12px Arial;color:#9a8984}nav{position:sticky;top:0;background:#fbf8f6ee;backdrop-filter:blur(8px);border-bottom:1px solid #eadfda;text-align:center;padding:14px;z-index:2}nav a{margin:0 12px;color:#675754;text-decoration:none;font:12px Arial}section{max-width:850px;margin:auto;padding:75px 20px}.title{text-align:center;font-weight:400;font-size:32px;margin-bottom:35px}.timeline{border-left:1px solid #e4d3ce;padding-left:25px;margin-left:10px}.event{position:relative;background:#fff;border:1px solid #eadfda;border-radius:18px;padding:18px;margin-bottom:18px}.event:before{content:'♡';position:absolute;left:-40px;top:16px;color:#b98484;background:#fbf8f6}.date{font:11px Arial;color:#b98484;text-transform:uppercase;letter-spacing:1px}.event h3{font-weight:400;margin:7px 0}.event p{color:#766863;margin:0}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.photo{aspect-ratio:1;background:#eee3df;border-radius:16px;overflow:hidden;display:grid;place-items:center;color:#9a8580;font:12px Arial}.photo img{width:100%;height:100%;object-fit:cover}.letter{background:#fff;border:1px solid #eadfda;border-radius:22px;padding:30px;line-height:1.8;text-align:center;white-space:pre-line}footer{text-align:center;padding:30px;color:#a18e89;font:11px Arial}@media(max-width:600px){.gallery{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header class="hero"><div><div class="eyebrow">a nossa história</div><h1>Nós Dois ♡</h1><p>Desde <span id="date">a nossa data</span></p><div class="counter"><div class="days" id="days">0</div><div class="label">DIAS JUNTOS ❤️</div></div></div></header>
+<nav><a href="#historia">HISTÓRIA</a><a href="#memorias">MEMÓRIAS</a><a href="#carta">CARTA</a></nav>
+<section id="historia"><h2 class="title">A nossa história</h2><div class="timeline" id="timeline"></div></section>
+<section id="memorias"><h2 class="title">As nossas memórias</h2><div class="gallery" id="gallery"></div></section>
+<section id="carta"><h2 class="title">Para ti</h2><div class="letter" id="letter"></div></section>
+<footer>feito com amor, para guardar o que é nosso ♡</footer>
+<script>
+const CONFIG={
+ inicio:'2024-01-01',
+ memorias:[
+  {data:'01/01/2024',titulo:'O começo de nós',texto:'O dia em que começou a nossa história.'},
+  {data:'14/02/2024',titulo:'Um dia especial',texto:'Uma memória que queremos guardar para sempre.'},
+  {data:'01/06/2024',titulo:'Mais uma aventura',texto:'Escreve aqui o que aconteceu.'}
+ ],
+ fotos:['fotos/foto1.jpg','fotos/foto2.jpg','fotos/foto3.jpg','fotos/foto4.jpg','fotos/foto5.jpg','fotos/foto6.jpg'],
+ carta:'Meu amor,\n\nQuero guardar aqui um bocadinho da nossa história: os dias que já vivemos, as fotografias que nos fazem sorrir e todos aqueles momentos que só nós entendemos.\n\nQue este cantinho continue a crescer connosco. ❤️\n\nAmo-te.'
+};
+const inicio=new Date(CONFIG.inicio+'T00:00:00'),hoje=new Date(); const dias=Math.max(0,Math.floor((new Date(hoje.getFullYear(),hoje.getMonth(),hoje.getDate())-inicio)/86400000));
+document.querySelector('#days').textContent=dias.toLocaleString('pt-PT');document.querySelector('#date').textContent=inicio.toLocaleDateString('pt-PT',{day:'2-digit',month:'long',year:'numeric'});
+document.querySelector('#timeline').innerHTML=CONFIG.memorias.map(x=>`<article class="event"><div class="date">${x.data}</div><h3>${x.titulo}</h3><p>${x.texto}</p></article>`).join('');
+document.querySelector('#gallery').innerHTML=CONFIG.fotos.map((x,i)=>`<div class="photo"><img src="${x}" alt="Memória ${i+1}" onerror="this.style.display='none';this.parentElement.innerHTML='♡<br>foto ${i+1}'"></div>`).join('');document.querySelector('#letter').textContent=CONFIG.carta;
+</script></body></html>
